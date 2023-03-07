@@ -24,3 +24,18 @@ class Queue:
         else:
             return self.queue.pop()
 
+
+less_urgent = Queue()
+normal = Queue(pop_limit=2, lesser_urgent=less_urgent)
+urgent = Queue(pop_limit=3, lesser_urgent=normal)
+
+today = []
+
+
+def stack():
+    while today.__len__() < 3:
+        next_item = urgent.pop()
+        if next_item:
+            today.append(next_item)
+        else:
+            break
