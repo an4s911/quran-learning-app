@@ -1,3 +1,7 @@
+from datetime import datetime
+from pickle import dump, load
+
+
 class Queue:
 
     def __init__(self, pop_limit=1, lesser_urgent=None):
@@ -25,17 +29,42 @@ class Queue:
             return self.queue.pop()
 
 
-less_urgent = Queue()
-normal = Queue(pop_limit=2, lesser_urgent=less_urgent)
-urgent = Queue(pop_limit=3, lesser_urgent=normal)
-
-today = []
-
-
-def stack():
-    while today.__len__() < 3:
-        next_item = urgent.pop()
+def stack(urgencies, day):
+    while day.__len__() < 3:
+        next_item = urgencies[0].pop()
         if next_item:
-            today.append(next_item)
+            day.append(next_item)
         else:
             break
+
+
+def main():
+    urgency_list_filename = 'urgencies.pickle'
+    today_schedule_filename = 'today.pickle'
+
+    try:
+        urgent = load(open(urgency_list_filename, 'rb'))
+    except FileNotFoundError:
+        less_urgent = Queue()
+        normal = Queue(pop_limit=2, lesser_urgent=less_urgent)
+        urgent = Queue(pop_limit=3, lesser_urgent=normal)
+
+        dump(urgent, open(urgency_list_filename, 'wb+'))
+    else:
+        normal = urgent.lesser_urgent
+        less_urgent = normal.lesser_urgent
+
+    try:
+        today_schedule = load(open(today_schedule_filename, 'rb'))
+    except FileNotFoundError:
+        today_schedule = {
+            'date': datetime.today().date(),
+            'queue': [],
+            'stacked': False
+        }
+
+        dump(today_schedule, open(today_schedule_filename, 'wb+'))
+
+
+if __name__ == "__main__":
+    main()
