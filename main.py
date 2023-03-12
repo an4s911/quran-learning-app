@@ -91,12 +91,12 @@ def load_data() -> dict:
     return data
 
 
-def restack_today():
+def restack_today(limit=3):
     data = load_data()
 
     today_schedule = data['today_schedule']
     urgent = data['urgent']
-    while today_schedule.__len__() < 3:
+    while today_schedule.__len__() < limit:
         next_item = urgent.pop()
         if next_item:
             today_schedule.push(next_item, append=True)
