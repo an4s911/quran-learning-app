@@ -17,9 +17,11 @@ def show_today():
     print("\n" + "-"*20)
     print("| Today's Schedule |")
     print("-"*20 + "\n")
+
     if today_schedule.__len__() == 0:
         print("Schdule is empty")
         print("Restack and try again...")
+
     else:
         for item in today_schedule.queue:
             print(item)

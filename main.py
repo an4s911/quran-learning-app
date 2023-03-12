@@ -21,11 +21,14 @@ class Queue:
     def __len__(self):
         return len(self.queue)
 
-    def push(self, item):
+    def push(self, item, append=None):
         if item in self.queue:
             raise ValueError(f"{item} is already in the queue")
 
-        self.queue.insert(0, item)
+        if not append:
+            self.queue.insert(0, item)
+        else:
+            self.queue.append(item)
 
     def pop(self, index=-1):
         if not self.queue:
@@ -96,7 +99,7 @@ def restack_today():
     while today_schedule.__len__() < 3:
         next_item = urgent.pop()
         if next_item:
-            today_schedule.push(next_item)
+            today_schedule.push(next_item, append=True)
         else:
             break
 
