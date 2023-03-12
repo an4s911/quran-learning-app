@@ -1,6 +1,6 @@
 from main import Queue
 from main import get_today_schedule, restack_today, get_lists, get_list
-from main import remove_item_from_list
+from main import remove_item_from_list, get_next_card
 from main import add_item as add_item_to_list
 
 urgencies = {
@@ -27,8 +27,10 @@ def show_today():
     print("\n" + "*"*20 + "\n")
 
 
-def add_item():
-    item_name = input("Name: ")
+def add_item(item_name=None):
+    if not item_name:
+        item_name = input("Name: ")
+
     print("(U)rgent\n(N)ormal\n(L)ess Urgent")
     urgency_choice = input(": ").lower()
 
@@ -49,6 +51,28 @@ def show_lists():
 
     for item in lists:
         print(item)
+
+
+def show_next():
+    today_schedule = get_today_schedule()
+    next_card = get_next_card()
+
+    if not next_card:
+        print("No next card")
+        return
+
+    print_line_in_box("Current Card: " + next_card)
+    input("Press Enter to continue...")
+    print("Add card to list")
+
+    add_item(next_card)
+
+
+def print_line_in_box(line: str):
+    length = line.__len__() + 10
+    print('-' * length)
+    print('|' + line.center(length - 2, ' ') + '|')
+    print('-' * length)
 
 
 def advanced():
@@ -75,12 +99,13 @@ def main():
     while True:
         print('='*5 + "MENU" + '='*5)
         print("1. Today")
-        print("2. Restack")
-        print("3. Add")
-        print("4. Lists")
+        print("2. Next")
+        print("3. Restack")
+        print("4. Add")
+        print("5. Lists")
         print("0. Exit")
         print("-"*14)
-        print("5.advanced")
+        print("6.advanced")
 
         choice = int(input(": "))
 
@@ -89,15 +114,18 @@ def main():
                 show_today()
 
             case 2:
-                restack_today()
+                show_next()
 
             case 3:
-                add_item()
+                restack_today()
 
             case 4:
-                show_lists()
+                add_item()
 
             case 5:
+                show_lists()
+
+            case 6:
                 advanced()
 
             case 0:

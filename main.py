@@ -121,6 +121,18 @@ def get_lists():
     return [data[i] for i in data]
 
 
+def get_next_card():
+    data = load_data()
+
+    today_schedule = data['today_schedule']
+
+    next_item = today_schedule.pop()
+
+    save_data(data)
+
+    return next_item
+
+
 def main():
     pass
 
