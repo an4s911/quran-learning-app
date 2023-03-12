@@ -31,6 +31,10 @@ def add_item(item_name=None):
     if not item_name:
         item_name = input("Name: ")
 
+    if item_name in ['0', 'exit']:
+        print("Canceling...")
+        return
+
     print("(U)rgent\n(N)ormal\n(L)ess Urgent")
     urgency_choice = input(": ").lower()
 
