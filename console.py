@@ -111,7 +111,7 @@ def main():
         print("5. Lists")
         print("0. Exit")
         print("-"*14)
-        print("6.advanced")
+        print("9.advanced")
 
         choice = int(input(": "))
 
@@ -131,7 +131,7 @@ def main():
             case 5:
                 show_lists()
 
-            case 6:
+            case 9:
                 advanced()
 
             case 0:
