@@ -21,7 +21,7 @@ class Queue:
     def __len__(self):
         return len(self.queue)
 
-    def push(self, item, append=None):
+    def push(self, item, append=False):
         if item in self.queue:
             raise ValueError(f"{item} is already in the queue")
 
