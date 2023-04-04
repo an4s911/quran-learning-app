@@ -20,6 +20,9 @@ class Queue:
 
     def __len__(self):
         return len(self.queue)
+    
+    def __bool__(self):
+        return True
 
     def push(self, item, append=False):
         if item in self.queue:
