@@ -132,7 +132,7 @@ def get_next_card():
 
     today_schedule = data['today_schedule']
 
-    next_item = today_schedule.pop()
+    next_item = today_schedule.pop(0)
 
     save_data(data)
 
