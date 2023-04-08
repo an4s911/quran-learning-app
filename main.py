@@ -59,7 +59,7 @@ def add_item(item, urgency_list: str):
     except KeyError:
         raise KeyError(f'Urgency list {urgency_list} does not exist')
     else:
-        data[latest] = item
+        data['latest'] = item
 
     save_data(data)
 
