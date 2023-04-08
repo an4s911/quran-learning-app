@@ -29,7 +29,7 @@ def show_today():
     print("\n" + "*"*20 + "\n")
 
 
-def add_item(item_name=None):
+def add_item(item_name=None, new=False):
     if not item_name:
         item_name = input("Name: ")
 
@@ -43,7 +43,7 @@ def add_item(item_name=None):
     match urgency_choice:
         case 'u' | 'n' | 'l':
             try:
-                add_item_to_list(item_name, urgencies[urgency_choice])
+                add_item_to_list(item_name, urgencies[urgency_choice], new)
             except ValueError:
                 print("Item already exists in list")
 
@@ -136,7 +136,7 @@ def main():
                 restack_today()
 
             case 4:
-                add_item()
+                add_item(new=True)
 
             case 5:
                 show_lists()

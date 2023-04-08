@@ -51,7 +51,7 @@ class Queue:
             return self.queue.pop(index)
 
 
-def add_item(item, urgency_list: str):
+def add_item(item, urgency_list: str, new=False):
     data = load_data()
 
     try:
@@ -59,7 +59,8 @@ def add_item(item, urgency_list: str):
     except KeyError:
         raise KeyError(f'Urgency list {urgency_list} does not exist')
     else:
-        data['latest'] = item
+        if new:
+            data['latest'] = item
 
     save_data(data)
 
