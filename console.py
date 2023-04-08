@@ -1,6 +1,6 @@
 from main import Queue
 from main import get_today_schedule, restack_today, get_lists, get_list
-from main import remove_item_from_list, get_next_card
+from main import remove_item_from_list, get_next_card, get_latest_item
 from main import add_item as add_item_to_list
 
 urgencies = {
@@ -81,6 +81,15 @@ def print_line_in_box(line: str):
     print('-' * length)
 
 
+def show_latest():
+    latest_item = get_latest_item()
+    if latest_item:
+        print("="*2 + " Latest added item " + "="*2)
+        print_line_in_box(get_latest_item())
+    else:
+        print("No latest item found!")
+
+
 def advanced():
     print("Advanced")
     print("(R)emove item")
@@ -109,6 +118,7 @@ def main():
         print("3. Restack")
         print("4. Add")
         print("5. Lists")
+        print("6. Latest")
         print("0. Exit")
         print("-"*14)
         print("9.advanced")
@@ -130,6 +140,9 @@ def main():
 
             case 5:
                 show_lists()
+
+            case 6:
+                show_latest()
 
             case 9:
                 advanced()

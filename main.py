@@ -58,6 +58,8 @@ def add_item(item, urgency_list: str):
         data[urgency_list].push(item)
     except KeyError:
         raise KeyError(f'Urgency list {urgency_list} does not exist')
+    else:
+        data[latest] = item
 
     save_data(data)
 
@@ -71,6 +73,11 @@ def remove_item_from_list(urgency_list: str, index=-1):
         raise KeyError(f'Urgency list {urgency_list} does not exist')
 
     save_data(data)
+
+def get_latest_item():
+    data = load_data()
+
+    return data['latest']
 
 
 def save_data(data: dict):
@@ -89,7 +96,8 @@ def load_data() -> dict:
             'today_schedule': Queue('today_schedule'),
             'urgent': urgent,
             'normal': normal,
-            'less_urgent': less_urgent
+            'less_urgent': less_urgent,
+            'latest': None
         }
 
         save_data(data)
