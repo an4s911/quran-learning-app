@@ -24,6 +24,9 @@ class Queue:
     def __bool__(self):
         return True
 
+    def __getitem__(self, item: int):
+        return self.queue[item]
+
     def push(self, item, append=False):
         if item in self.queue:
             raise ValueError(f"{item} is already in the queue")
