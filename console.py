@@ -74,20 +74,20 @@ def show_next():
     add_item(next_card)
 
 
+def show_latest():
+    latest_item = get_latest_item()
+    if latest_item:
+        print_line_in_box("Latest added item")
+        print(get_latest_item())
+    else:
+        print("No latest item found!")
+
+
 def print_line_in_box(line: str):
     length = line.__len__() + 10
     print('-' * length)
     print('|' + line.center(length - 2, ' ') + '|')
     print('-' * length)
-
-
-def show_latest():
-    latest_item = get_latest_item()
-    if latest_item:
-        print("="*2 + " Latest added item " + "="*2)
-        print_line_in_box(get_latest_item())
-    else:
-        print("No latest item found!")
 
 
 def advanced():
