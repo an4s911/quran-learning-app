@@ -136,7 +136,7 @@ def get_list(urgency_list: str):
 def get_lists():
     data = load_data()
 
-    return [data[i] for i in data]
+    return [data[i] for i in data if type(data[i]) == Queue]
 
 
 def get_next_card():
