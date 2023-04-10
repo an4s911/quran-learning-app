@@ -77,10 +77,14 @@ def show_next():
 def show_latest():
     latest_item = get_latest_item()
     if latest_item:
+        print()
         print_line_in_box("Latest added item")
+        print()
         print(get_latest_item())
+        print("\n" + "*"*20 + "\n")
     else:
-        print("No latest item found!")
+        print_line_in_box("No latest item found!")
+
 
 
 def print_line_in_box(line: str):
