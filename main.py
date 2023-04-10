@@ -1,4 +1,3 @@
-from datetime import datetime
 from pickle import dump, load
 
 FILENAME = 'data.pkl'
