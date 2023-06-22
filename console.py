@@ -1,7 +1,7 @@
 from main import Queue
 from main import get_today_schedule, restack_today, get_lists, get_list
 from main import remove_item_from_list, get_next_card, get_latest_item
-from main import add_item as add_item_to_list
+from main import add_item as add_item_to_list, update_latest_item
 
 urgencies = {
     't': 'today_schedule',
@@ -97,26 +97,33 @@ def print_line_in_box(line: str):
 def advanced():
     print("Advanced")
     print("(R)emove item")
+    print("(CL) Change Latest item")
     choice = input(": ").lower()
+
+    if choice in ['r', 'cl']:
+        show_lists()
+        list_choice = urgencies[input(
+            "(T) / (1) / (2) / (3) / (4): ").lower()]
+        list_items = get_list(list_choice)
+        if (len(list_items) == 0):
+            print_line_in_box("List is empty")
+            return;
+
+        for num, item in enumerate(list_items.queue, start=1):
+            print(f"{num}. {item}")
+
+        choice_num = int(input(": ")) - 1
 
     match choice:
         case 'r':
-            show_lists()
-            list_choice = urgencies[input(
-                "(T) / (1) / (2) / (3) / (4): ").lower()]
-            list_items = get_list(list_choice)
+            try:
+                remove_item_from_list(list_choice, choice_num)
+            except IndexError:
+                print_line_in_box("Invalid choice, no items removed")
 
-            if (len(list_items) > 0):
-                for num, item in enumerate(list_items.queue, start=1):
-                    print(f"{num}. {item}")
+        case 'cl':
+            update_latest_item(list_items[choice_num])
 
-                choice_num = int(input(": ")) - 1
-                try:
-                    remove_item_from_list(list_choice, choice_num)
-                except IndexError:
-                    print_line_in_box("Invalid choice, no items removed")
-            else:
-                print_line_in_box("List is empty")
 
 
 def main():

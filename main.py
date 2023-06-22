@@ -79,6 +79,10 @@ def get_latest_item():
 
     return data['latest']
 
+def update_latest_item(new_item: str):
+    data = load_data()
+    data['latest'] = new_item
+    save_data(data)
 
 def save_data(data: dict):
     dump(data, open(FILENAME, 'wb+'))
