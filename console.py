@@ -102,14 +102,21 @@ def advanced():
     match choice:
         case 'r':
             show_lists()
-            list_choice = urgencies[input("(T) / (1) / (2) / (3) / (4): ").lower()]
+            list_choice = urgencies[input(
+                "(T) / (1) / (2) / (3) / (4): ").lower()]
             list_items = get_list(list_choice)
 
-            for num, item in enumerate(list_items.queue, start=1):
-                print(f"{num}. {item}")
+            if (len(list_items) > 0):
+                for num, item in enumerate(list_items.queue, start=1):
+                    print(f"{num}. {item}")
 
-            choice_num = int(input(": ")) - 1
-            remove_item_from_list(list_choice, choice_num)
+                choice_num = int(input(": ")) - 1
+                try:
+                    remove_item_from_list(list_choice, choice_num)
+                except IndexError:
+                    print_line_in_box("Invalid choice, no items removed")
+            else:
+                print_line_in_box("List is empty")
 
 
 def main():
