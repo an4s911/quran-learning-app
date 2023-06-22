@@ -5,9 +5,10 @@ from main import add_item as add_item_to_list
 
 urgencies = {
     't': 'today_schedule',
-    'u': 'urgent',
-    'n': 'normal',
-    'l': 'less_urgent'
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4'
 }
 
 
@@ -37,11 +38,11 @@ def add_item(item_name=None, new=False):
         print("Canceling...")
         return
 
-    print("(U)rgent\n(N)ormal\n(L)ess Urgent")
+    print("(1) / (2) / (3) / (4)")
     urgency_choice = input(": ").lower()
 
     match urgency_choice:
-        case 'u' | 'n' | 'l':
+        case '1' | '2' | '3' | '4':
             try:
                 add_item_to_list(item_name, urgencies[urgency_choice], new)
             except ValueError:
@@ -86,7 +87,6 @@ def show_latest():
         print_line_in_box("No latest item found!")
 
 
-
 def print_line_in_box(line: str):
     length = line.__len__() + 10
     print('-' * length)
@@ -102,7 +102,7 @@ def advanced():
     match choice:
         case 'r':
             show_lists()
-            list_choice = urgencies[input("(T) / (U) / (N) / (L): ").lower()]
+            list_choice = urgencies[input("(T) / (1) / (2) / (3) / (4): ").lower()]
             list_items = get_list(list_choice)
 
             for num, item in enumerate(list_items.queue, start=1):

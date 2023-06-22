@@ -88,15 +88,17 @@ def load_data() -> dict:
     try:
         data = load(open(FILENAME, 'rb'))
     except FileNotFoundError:
-        less_urgent = Queue("less_urgent")
-        normal = Queue("normal", pop_limit=2, lesser_urgent=less_urgent)
-        urgent = Queue("urgent", pop_limit=3, lesser_urgent=normal)
+        list4 = Queue("4")
+        list3 = Queue("3", pop_limit=5, lesser_urgent=list4)
+        list2 = Queue("2", pop_limit=2, lesser_urgent=list3)
+        list1 = Queue("1", pop_limit=3, lesser_urgent=list2)
 
         data = {
             'today_schedule': Queue('today_schedule'),
-            'urgent': urgent,
-            'normal': normal,
-            'less_urgent': less_urgent,
+            '1': list1,
+            '2': list2,
+            '3': list3,
+            '4': list4,
             'latest': None
         }
 
@@ -109,9 +111,9 @@ def restack_today(limit=3):
     data = load_data()
 
     today_schedule = data['today_schedule']
-    urgent = data['urgent']
+    list1 = data['1']
     while today_schedule.__len__() < limit:
-        next_item = urgent.pop()
+        next_item = list1.pop()
         if next_item:
             today_schedule.push(next_item, append=True)
         else:
@@ -126,7 +128,7 @@ def get_today_schedule():
     return data['today_schedule']
 
 
-def get_list(urgency_list: str):
+def get_list(urgency_list: str) -> list:
     data = load_data()
 
     return data[urgency_list]
