@@ -98,9 +98,10 @@ def advanced():
     print("Advanced")
     print("(R)emove item")
     print("(CL) Change Latest item")
+    print("(M)ove item")
     choice = input(": ").lower()
 
-    if choice in ['r', 'cl']:
+    if choice in ['r', 'cl', 'm']:
         show_lists()
         list_choice = urgencies[input(
             "(T) / (1) / (2) / (3) / (4): ").lower()]
@@ -115,15 +116,18 @@ def advanced():
         choice_num = int(input(": ")) - 1
 
     match choice:
-        case 'r':
+        case 'r' | 'm':
             try:
-                remove_item_from_list(list_choice, choice_num)
+                removed_item = remove_item_from_list(list_choice, choice_num)
             except IndexError:
                 print_line_in_box("Invalid choice, no items removed")
 
         case 'cl':
             update_latest_item(list_items[choice_num])
 
+    if choice in ['m']:
+        print_line_in_box("Item to move: " + removed_item)
+        add_item(removed_item)
 
 
 def main():

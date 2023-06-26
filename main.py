@@ -68,11 +68,13 @@ def remove_item_from_list(urgency_list: str, index=-1):
     data = load_data()
 
     try:
-        data[urgency_list].pop(index)
+        removed_item = data[urgency_list].pop(index)
     except KeyError:
         raise KeyError(f'Urgency list {urgency_list} does not exist')
+    else:
+        save_data(data)
+        return removed_item
 
-    save_data(data)
 
 def get_latest_item():
     data = load_data()
