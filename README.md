@@ -19,7 +19,7 @@ and the program runs
 
 The way it helps in revising Quran memorization is using something called a spaced-repitition algorithm[^1]. It is not the perfect implementation of it, but it is something that works for this purpose. And I built it to be simple and easy to use, and with not a lot of complications, which might lead to problems later on that can interrupt my revision process. It specifically uses somewhat of a modified version of something called as a Leitner-System[^2], which uses three boxes to arrange your learning "cards". 
 
-Its very simple, there are 4 boxes namely *Today Schedule*, *Urgent*, *Normal* and *Less Urgent*. The first one is only to represent what you will revise today. The other three are frequency boxes, where *Urgent* is the most often repeated, *Normal* being less often and *Less Urgent* being the least often[^3] (<-- please do read the footnote). 
+Its very simple, there are 5 boxes namely *Today Schedule*, *1*, *2*, *3* and *4*. The first one is only to represent what you will revise today. The other three are frequency boxes, where *1* is the most often repeated, *2* being less often than *1* and more often than *3*, and *4* being the least often[^3] (<-- please do read the footnote). 
 
 When you first run the code, it gives you menu of functions this program offers:
 ```
